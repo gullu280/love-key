@@ -3,7 +3,14 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
-import { FaWhatsapp, FaFacebookF, FaTwitter, FaLink, FaInstagram, FaFacebookMessenger } from "react-icons/fa";
+import {
+  FaWhatsapp,
+  FaFacebookF,
+  FaTwitter,
+  FaLink,
+  FaInstagram,
+  FaFacebookMessenger,
+} from "react-icons/fa";
 
 export default function App() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -26,24 +33,33 @@ export default function App() {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   useEffect(() => {
-    if (step === "unlock") setHearts([0, 1, 2].sort(() => Math.random() - 0.5));
+    if (step === "unlock")
+      setHearts([0, 1, 2].sort(() => Math.random() - 0.5));
   }, [step]);
 
   const correctIndex = 2;
-  const shareUrl = `${window.location.origin}?name=${encodeURIComponent(customName)}`;
+  const shareUrl = `${window.location.origin}?name=${encodeURIComponent(
+    customName
+  )}`;
 
   const handleHeartClick = (index) => {
-    setClickCount(prev => prev + 1);
+    setClickCount((prev) => prev + 1);
 
     if (index === correctIndex) {
       setUnlocked(true);
       setWrongTry(false);
       if (clickCount === 0)
-        setUnlockRating("🌟 Wow! You unlocked me on your first try! Your luck is amazing for me!");
+        setUnlockRating(
+          "🌟 Wow! You unlocked me on your first try! Your luck is amazing for me!"
+        );
       else if (clickCount === 1)
-        setUnlockRating("✨ Lucky you! You unlocked me on your second try! Your luck is good for me!");
+        setUnlockRating(
+          "✨ Lucky you! You unlocked me on your second try! Your luck is good for me!"
+        );
       else
-        setUnlockRating("💖 Not lucky this time, but still special! You unlocked me finally!");
+        setUnlockRating(
+          "💖 Not lucky this time, but still special! You unlocked me finally!"
+        );
 
       setLuckMessage("");
       setTimeout(() => {
@@ -57,7 +73,7 @@ export default function App() {
       const messages = [
         "🌟 Amazing! Your luck is shining!",
         "✨ Lucky you! Almost there!",
-        "💖 Not lucky this time, but still special!"
+        "💖 Not lucky this time, but still special!",
       ];
       setLuckMessage(messages[clickCount] || "💫 Keep trying, your luck awaits!");
       setTimeout(() => setWrongTry(false), 500);
@@ -76,7 +92,7 @@ export default function App() {
     }
     setName(customName);
     setNameSaved(true);
-    alert(`Name saved! You can now share the link with "${customName}"`);
+    
   };
 
   return (
@@ -123,10 +139,6 @@ export default function App() {
             Will you be my forever? 💕
           </h3>
 
-          <p style={{ fontSize: "0.9rem", color: "#800000" }}>
-            🌟 Created with ❤️ by <strong>Gulam Mustafa</strong>
-          </p>
-
           <div className="d-flex justify-content-center gap-3 mb-3">
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -154,7 +166,8 @@ export default function App() {
 
           {/* Name input */}
           <p style={{ fontSize: "0.9rem", color: "#FF1493" }}>
-            💡 You can change your name before sharing so your special one sees it!
+            💡 You can change your name before sharing so your special one sees
+            it!
           </p>
           <input
             type="text"
@@ -178,21 +191,40 @@ export default function App() {
             </button>
           </div>
 
+          {/* 🌟 Created By Gulam Mustafa (shifted here) */}
+          <p style={{ fontSize: "0.9rem", color: "#800000" }}>
+            🌟 Created with ❤️ by <strong>Gulam Mustafa</strong>
+          </p>
+
           {/* Share Modal */}
           {showShareModal && (
             <div
               className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
               style={{ backgroundColor: "rgba(0,0,0,0.5)", zIndex: 9999 }}
             >
-              <div className="p-4 rounded bg-white text-center" style={{ width: "340px" }}>
-                <h4 className="mb-3" style={{ fontFamily: "'Dancing Script', cursive", color: "#8B0000" }}>
+              <div
+                className="p-4 rounded bg-white text-center"
+                style={{ width: "340px" }}
+              >
+                <h4
+                  className="mb-3"
+                  style={{
+                    fontFamily: "'Dancing Script', cursive",
+                    color: "#8B0000",
+                  }}
+                >
                   Share ❤️
                 </h4>
                 <div className="d-flex flex-wrap justify-content-around mb-3 gap-2">
                   <button
                     className="btn btn-success"
                     onClick={() =>
-                      window.open(`https://wa.me/?text=${encodeURIComponent(`Hey! Check this out: ${shareUrl}`)}`, "_blank")
+                      window.open(
+                        `https://wa.me/?text=${encodeURIComponent(
+                          `Hey! Check this out: ${shareUrl}`
+                        )}`,
+                        "_blank"
+                      )
                     }
                   >
                     <FaWhatsapp /> WhatsApp
@@ -200,7 +232,12 @@ export default function App() {
                   <button
                     className="btn btn-primary"
                     onClick={() =>
-                      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, "_blank")
+                      window.open(
+                        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                          shareUrl
+                        )}`,
+                        "_blank"
+                      )
                     }
                   >
                     <FaFacebookF /> Facebook
@@ -208,7 +245,12 @@ export default function App() {
                   <button
                     className="btn btn-info text-white"
                     onClick={() =>
-                      window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent("Check this out!")}`, "_blank")
+                      window.open(
+                        `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                          shareUrl
+                        )}&text=${encodeURIComponent("Check this out!")}`,
+                        "_blank"
+                      )
                     }
                   >
                     <FaTwitter /> Twitter
@@ -219,7 +261,12 @@ export default function App() {
                     className="btn btn-danger"
                     onClick={() => {
                       if (isMobile) {
-                        window.open(`instagram://share?text=${encodeURIComponent(shareUrl)}`, "_blank");
+                        window.open(
+                          `instagram://share?text=${encodeURIComponent(
+                            shareUrl
+                          )}`,
+                          "_blank"
+                        );
                       } else {
                         navigator.clipboard.writeText(shareUrl);
                         alert("Copy this link and share on Instagram!");
@@ -233,7 +280,10 @@ export default function App() {
                     className="btn btn-warning text-white"
                     onClick={() => {
                       if (isMobile) {
-                        window.open(`imo://send?text=${encodeURIComponent(shareUrl)}`, "_blank");
+                        window.open(
+                          `imo://send?text=${encodeURIComponent(shareUrl)}`,
+                          "_blank"
+                        );
                       } else {
                         navigator.clipboard.writeText(shareUrl);
                         alert("Copy this link and share via IMO!");
@@ -247,7 +297,12 @@ export default function App() {
                     className="btn btn-primary text-white"
                     onClick={() => {
                       if (isMobile) {
-                        window.open(`fb-messenger://share?link=${encodeURIComponent(shareUrl)}`, "_blank");
+                        window.open(
+                          `fb-messenger://share?link=${encodeURIComponent(
+                            shareUrl
+                          )}`,
+                          "_blank"
+                        );
                       } else {
                         navigator.clipboard.writeText(shareUrl);
                         alert("Copy this link and share via Messenger!");
@@ -259,12 +314,18 @@ export default function App() {
 
                   <button
                     className="btn btn-secondary"
-                    onClick={() => { navigator.clipboard.writeText(shareUrl); alert("Link copied!"); }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(shareUrl);
+                      alert("Link copied!");
+                    }}
                   >
                     <FaLink /> Copy Link
                   </button>
                 </div>
-                <button className="btn btn-dark" onClick={() => setShowShareModal(false)}>
+                <button
+                  className="btn btn-dark"
+                  onClick={() => setShowShareModal(false)}
+                >
                   Close
                 </button>
               </div>
@@ -318,12 +379,26 @@ export default function App() {
           </div>
 
           {luckMessage && (
-            <p style={{ color: "#FF1493", fontWeight: "bold", fontSize: "1rem", marginTop: "10px" }}>
+            <p
+              style={{
+                color: "#FF1493",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                marginTop: "10px",
+              }}
+            >
               {luckMessage}
             </p>
           )}
           {unlockRating && (
-            <p style={{ color: "#FF1493", fontWeight: "bold", fontSize: "1rem", marginTop: "10px" }}>
+            <p
+              style={{
+                color: "#FF1493",
+                fontWeight: "bold",
+                fontSize: "1rem",
+                marginTop: "10px",
+              }}
+            >
               {unlockRating}
             </p>
           )}
@@ -344,7 +419,10 @@ export default function App() {
                 💖 You unlocked my heart! 💖
               </h2>
               <p style={{ fontSize: "1.1rem", lineHeight: "1.6" }}>
-                My love, you’ve found the key to my heart! 🌹 Every beat of my heart is yours, every smile is for you, and every moment I spend with you is my happiest. Together, we can make endless memories and endless love. Forever yours, <strong>{name}</strong> ✨
+                My love, you’ve found the key to my heart! 🌹 Every beat of my
+                heart is yours, every smile is for you, and every moment I spend
+                with you is my happiest. Together, we can make endless memories
+                and endless love. Forever yours, <strong>{name}</strong> ✨
               </p>
             </motion.div>
           )}
